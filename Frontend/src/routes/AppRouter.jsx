@@ -4,6 +4,7 @@ import useUserStore from '../stores/userStore'
 import AdminLayout from '../layouts/adminLayout'
 import UserLayout from '../layouts/userLayout'
 import CardDetail from '../components/user/CardDetail'
+import History from '../pages/user/History'
 
 const Login = lazy(() => import('../pages/public/Login'))
 const Card = lazy(() => import('../pages/user/Card'))
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
       { path: "card/:id", element: <CardDetail /> },
       { path: "order", element: <Order /> },
       { path: "payment/:orderId", element: <Payment /> },
+      { path: "history", element: <History /> },
     ]
   },
 

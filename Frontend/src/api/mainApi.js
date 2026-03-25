@@ -3,10 +3,7 @@ import axios from 'axios'
 
 
 export const mainApi = axios.create({
-  baseURL: 'http://localhost:8888/api',
-  headers: {
-    'Content-Type': 'application/json'
-  }
+  baseURL: 'http://localhost:8888/api'
 })
 
 mainApi.interceptors.request.use(config => {
@@ -23,8 +20,9 @@ export const apiRegister = async (body) => {
 
 // user
 export const getAllCard = () => mainApi.get('/cards')
-
 export const getCardById = (id) => mainApi.get(`/cards/${id}`)
 
+// order
 export const createOrder = (body) => mainApi.post('/orders', body)
 export const getAllOrder = () => mainApi.get('/orders')
+export const notifyPayment = (orderId, data) => mainApi.patch(`/orders/${orderId}/payment`, data)

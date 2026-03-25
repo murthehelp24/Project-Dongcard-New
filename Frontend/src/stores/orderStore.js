@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { createOrder, getAllOrder } from "../api/mainApi"
+import { createOrder, getAllOrder, notifyPayment } from "../api/mainApi"
 
 const useOrderStore = create((set, get) => ({
   orders: [],
@@ -12,6 +12,11 @@ const useOrderStore = create((set, get) => ({
   getAllOrder: async () => {
     const resp = await getAllOrder()
     set({ orders: resp.data.orders })
+    return resp
+  },
+  notifyPayment: async (orderId, data) => {
+    const resp = await notifyPayment(orderId, data)
+    get().getAllOrder()
     return resp
   }
 }))
