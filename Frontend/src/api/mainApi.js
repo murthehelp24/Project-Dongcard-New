@@ -22,3 +22,6 @@ export const apiRegister = async (body) => {
 }
 
 
+export const getAllCard = () => mainApi.get('/cards')
+
+export const getCardById =(id)=> mainApi.get(`/cards/${id}`)

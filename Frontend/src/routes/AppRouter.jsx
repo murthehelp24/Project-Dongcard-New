@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate, RouterProvider, Outlet } from 'react-rou
 import useUserStore from '../stores/userStore'
 import AdminLayout from '../layouts/adminLayout'
 import UserLayout from '../layouts/userLayout'
+import CardDetail from '../components/user/CardDetail'
 
 const Login = lazy(() => import('../pages/public/Login'))
 const Card = lazy(() => import('../pages/user/Card'))
@@ -24,7 +25,6 @@ const ProtectRoute = ({ allow, children }) => {
 }
 
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,11 +38,12 @@ const router = createBrowserRouter([
     path: "/user",
     element: (
       <ProtectRoute allow={["USER", "ADMIN"]}>
-        <UserLayout /> {/* หุ้ม Layout ไว้ตรงนี้ */}
+        <UserLayout /> 
       </ProtectRoute>
     ),
     children: [
       { index: true, element: <Card /> },
+      { path: "card/:id", element: <CardDetail /> },
       { path: "cart", element: <Cart /> },
       { path: "order", element: <Order /> },
     ]
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
     path: "/admin",
     element: (
       <ProtectRoute allow={["ADMIN"]}>
-        <AdminLayout /> {/* หุ้ม Layout ไว้ตรงนี้ */}
+        <AdminLayout />
       </ProtectRoute>
     ),
     children: [
