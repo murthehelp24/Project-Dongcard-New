@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import useCardStore from '../../stores/cardStore'
+import useCartStore from '../../stores/cartStore'
 import { Link } from 'react-router'
 import Pagination from './Pagination'
 
 function CardList() {
   const getAllCard = useCardStore(state => state.getAllCard)
   const cards = useCardStore(state => state.cards)
+
+  const addToCart = useCartStore(state => state.addToCart)
 
   useEffect(() => {
     getAllCard()
@@ -54,6 +57,7 @@ function CardList() {
                   </div>
                   <button
                     className="btn btn-primary btn-sm w-full ..."
+                    onClick={() => addToCart(card)}
                   >
                     ADD TO CART
                   </button>

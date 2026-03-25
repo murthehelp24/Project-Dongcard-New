@@ -21,7 +21,10 @@ export const apiRegister = async (body) => {
   return await mainApi.post('/auth/register', body)
 }
 
-
+// user
 export const getAllCard = () => mainApi.get('/cards')
 
-export const getCardById =(id)=> mainApi.get(`/cards/${id}`)
+export const getCardById = (id) => mainApi.get(`/cards/${id}`)
+
+export const createOrder = (body) => mainApi.post('/orders', body)
+export const getAllOrder = () => mainApi.get('/orders')
