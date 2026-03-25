@@ -1,0 +1,80 @@
+import { lazy, Suspense } from 'react'
+import { createBrowserRouter, Navigate, RouterProvider, Outlet } from 'react-router'
+import useUserStore from '../stores/userStore'
+import AdminLayout from '../layouts/adminLayout'
+import UserLayout from '../layouts/userLayout'
+
+const Login = lazy(() => import('../pages/public/Login'))
+const Card = lazy(() => import('../pages/user/Card'))
+const Cart = lazy(() => import('../pages/user/Cart'))
+const Order = lazy(() => import('../pages/user/Order'))
+const Dashboard = lazy(() => import('../pages/admin/Dashboard'))
+const ManageCard = lazy(() => import('../pages/admin/ManageCard'))
+const ManageOrder = lazy(() => import('../pages/admin/ManageOrder'))
+
+const ProtectRoute = ({ allow, children }) => {
+  const user = useUserStore(state => state.user)
+  if (!user) {
+    return <Navigate to="/login" replace />
+  }
+  if (!allow.includes(user.role)) {
+    return <Navigate to="/login" replace />
+  }
+  return children ? children : <Outlet />
+}
+
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />
+  },
+  {
+    path: "/login",
+    element: <Login />
+  },
+  {
+    path: "/user",
+    element: (
+      <ProtectRoute allow={["USER", "ADMIN"]}>
+        <UserLayout /> {/* หุ้ม Layout ไว้ตรงนี้ */}
+      </ProtectRoute>
+    ),
+    children: [
+      { index: true, element: <Card /> },
+      { path: "cart", element: <Cart /> },
+      { path: "order", element: <Order /> },
+    ]
+  },
+
+  {
+    path: "/admin",
+    element: (
+      <ProtectRoute allow={["ADMIN"]}>
+        <AdminLayout /> {/* หุ้ม Layout ไว้ตรงนี้ */}
+      </ProtectRoute>
+    ),
+    children: [
+      { index: true, element: <Dashboard /> },
+      { path: "manage-card", element: <ManageCard /> },
+      { path: "manage-order", element: <ManageOrder /> },
+    ]
+  },
+
+  { path: "*", element: <Navigate to="/" replace /> }
+])
+
+function AppRouter() {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner text-primary"></span>
+      </div>
+    }>
+      <RouterProvider router={router} />
+    </Suspense>
+  )
+}
+
+export default AppRouter

@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  CANCELLED
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  username  String     @unique
+  email     String     @unique
+  password  String
+  role      Role       @default(USER)
+  orders    Order[]
+  wishlists Wishlist[] // เพิ่มความสัมพันธ์กับ Wishlist
+  createdAt DateTime   @default(now())
+}
+
+model Card {
+  id         String      @id // เช่น "OP05-119"
+  name       String
+  rarity     String
+  color      String
+  type       String?
+  power      Int?
+  effect     String?
+  image      String?
+  price      Float
+  stock      Int         @default(0)
+  orderItems OrderItem[]
+  wishlists  Wishlist[] // การ์ดใบนี้ถูกเก็บใน Wishlist ของใครบ้าง
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Wishlist {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  card      Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  cardId    String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, cardId]) // ป้องกัน User เก็บการ์ดซ้ำใน Wishlist
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  status      OrderStatus @default(PENDING)
+  total       Float
+  paymentSlip String?
+  address     String      @db.Text
+  buyer       User        @relation(fields: [buyerId], references: [id])
+  buyerId     Int
+  items       OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        Int    @id @default(autoincrement())
+  order     Order  @relation(fields: [orderId], references: [id])
+  orderId   Int
+  card      Card   @relation(fields: [cardId], references: [id])
+  cardId    String
+  quantity  Int
+  soldPrice Float
+}
