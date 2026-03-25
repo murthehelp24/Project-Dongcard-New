@@ -3,12 +3,18 @@ import useCardStore from '../../stores/cardStore'
 import useCartStore from '../../stores/cartStore'
 import { Link } from 'react-router'
 import Pagination from './Pagination'
+import { toast } from 'react-toastify'
 
 function CardList() {
   const getAllCard = useCardStore(state => state.getAllCard)
   const cards = useCardStore(state => state.cards)
 
   const addToCart = useCartStore(state => state.addToCart)
+
+  const hdlAddToCart = (card) => {
+    addToCart(card)
+    toast.success(`เพิ่มการ์ด ${card.name} ลงตะกล้าแล้ว`)
+  }
 
   useEffect(() => {
     getAllCard()
@@ -57,7 +63,7 @@ function CardList() {
                   </div>
                   <button
                     className="btn btn-primary btn-sm w-full ..."
-                    onClick={() => addToCart(card)}
+                    onClick={() => hdlAddToCart(card)}
                   >
                     ADD TO CART
                   </button>

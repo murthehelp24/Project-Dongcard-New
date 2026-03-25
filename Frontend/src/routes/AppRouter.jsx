@@ -7,7 +7,7 @@ import CardDetail from '../components/user/CardDetail'
 
 const Login = lazy(() => import('../pages/public/Login'))
 const Card = lazy(() => import('../pages/user/Card'))
-const Cart = lazy(() => import('../pages/user/Cart'))
+const Payment = lazy(() => import('../pages/user/Payment'))
 const Order = lazy(() => import('../pages/user/Order'))
 const Dashboard = lazy(() => import('../pages/admin/Dashboard'))
 const ManageCard = lazy(() => import('../pages/admin/ManageCard'))
@@ -38,14 +38,14 @@ const router = createBrowserRouter([
     path: "/user",
     element: (
       <ProtectRoute allow={["USER", "ADMIN"]}>
-        <UserLayout /> 
+        <UserLayout />
       </ProtectRoute>
     ),
     children: [
       { index: true, element: <Card /> },
       { path: "card/:id", element: <CardDetail /> },
-      { path: "cart", element: <Cart /> },
       { path: "order", element: <Order /> },
+      { path: "payment/:orderId", element: <Payment /> },
     ]
   },
 

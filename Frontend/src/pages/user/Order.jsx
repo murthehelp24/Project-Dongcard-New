@@ -1,8 +1,10 @@
-import React from 'react'
+import OrderList from '../../components/user/OrderList'
 
 function Order() {
   return (
-    <div>Order</div>
+    <div>
+      <OrderList/>
+    </div>
   )
 }
 

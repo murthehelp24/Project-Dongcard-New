@@ -34,7 +34,7 @@ function NavbarUser() {
               <div className="card-body p-5">
 
 
-                <span className="font-bold text-lg">{cart.length} รายการ</span>
+                <span className="font-bold text-lg">{totalCard} รายการ</span>
 
                 <div className="divider my-0 opacity-50"></div>
 
@@ -45,7 +45,9 @@ function NavbarUser() {
                   </span>
                 </div>
                 <div className="card-actions">
-                  <Link to="/user/order" className="btn btn-primary btn-block hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/30">ดูตะกร้าสินค้า</Link>
+                  <Link to="/user/order"
+                    onClick={() => document.activeElement.blur()}
+                    className="btn btn-primary btn-block hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-lg shadow-primary/30">ดูตะกร้าสินค้า</Link>
                 </div>
               </div>
             </div>

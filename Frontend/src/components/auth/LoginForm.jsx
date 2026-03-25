@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router'
 
 function LoginForm() {
   const login = useUserStore(state => state.login)
-  const user = useUserStore(state => state.user)
   const navigate = useNavigate()
 
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
