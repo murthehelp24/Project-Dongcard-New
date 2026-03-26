@@ -33,8 +33,8 @@ function OrderList() {
             // console.log(orderId)
 
             toast.success('สั่งซื้อสำเร็จ')
-            cleanCart()
             await new Promise(resolve => setTimeout(resolve, 2000))
+            cleanCart()
             navigate(`/user/payment/${orderId}`)
         } catch (error) {
             console.log(error)

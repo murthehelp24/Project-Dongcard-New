@@ -25,4 +25,5 @@ export const getCardById = (id) => mainApi.get(`/cards/${id}`)
 // order
 export const createOrder = (body) => mainApi.post('/orders', body)
 export const getAllOrder = () => mainApi.get('/orders')
+export const getOrderById = (orderId) => mainApi.get(`/orders/${orderId}`)
 export const notifyPayment = (orderId, data) => mainApi.patch(`/orders/${orderId}/payment`, data)

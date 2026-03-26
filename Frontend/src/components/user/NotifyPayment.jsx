@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from 'react-router'
 import useOrderStore from '../../stores/orderStore'
-import { notifyPayment } from '../../api/mainApi'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 
@@ -39,7 +38,7 @@ function NotifyPayment() {
     }
   }
   return (
-    <div className="min-h-screen py-12 px-4 bg-gray-50">
+    <div className="min-h-screen py-12 px-4 text-base-200">
       <div className="max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
         <div className="bg-slate-800 p-8 text-white text-center">
           <h2 className="text-3xl font-extrabold tracking-tight">แจ้งโอนเงิน</h2>
@@ -47,7 +46,6 @@ function NotifyPayment() {
         </div>
 
         <div className="p-8">
-          {/* ส่วนข้อมูลบัญชี */}
           <div className="bg-slate-50 border border-slate-100 p-5 rounded-2xl mb-8 flex flex-col items-center text-center">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">บัญชีปลายทาง</span>
             <p className="text-xl font-bold text-slate-800 tracking-wider">123-4-56789-0</p>

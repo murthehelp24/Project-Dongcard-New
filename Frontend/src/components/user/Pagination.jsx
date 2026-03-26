@@ -13,7 +13,7 @@ export default function Pagination(props) {
           disabled={currentPage === 1}
           onClick={() => setCurrentPage(prev => prev - 1)}
         >
-          Previous
+          ย้อนกลับ
         </button>
 
         <span className="flex items-center px-4 text-sm text-gray-400">
@@ -25,7 +25,7 @@ export default function Pagination(props) {
           disabled={currentPage === totalPages}
           onClick={() => setCurrentPage(prev => prev + 1)}
         >
-          Next
+          ถัดไป
         </button>
       </div>
     </>

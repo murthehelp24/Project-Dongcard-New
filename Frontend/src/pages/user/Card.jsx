@@ -12,7 +12,7 @@ function Card() {
 
           <main className="drawer-content flex flex-col p-4 ">
             <header className="flex justify-between items-center ml-2 mt-1">
-              <h1 className="text-3xl font-bold">One Piece Special Offers</h1>
+              <h1 className="text-3xl font-bold">OnePiece Card Game</h1>
             </header>
             <div className='flex gap-2'>
 
