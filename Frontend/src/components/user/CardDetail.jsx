@@ -1,12 +1,23 @@
 import React, { useEffect } from 'react'
 import useCardStore from '../../stores/cardStore'
 import { useNavigate, useParams } from 'react-router'
+import WishlistCard from './WishlistCard'
+import useCartStore from '../../stores/cartStore'
+import { toast } from 'react-toastify'
 
 function CardDetail() {
   const { id } = useParams()
   const getCardById = useCardStore(state => state.getCardById)
   const currentCard = useCardStore(state => state.currentCard)
   const navigate = useNavigate()
+
+  const addToCart = useCartStore(state => state.addToCart)
+
+
+  const hdlAddToCart = () => {
+    addToCart(currentCard)
+    toast.success(`เพิ่มการ์ด ${currentCard.name} ลงตะกล้าแล้ว`)
+  }
 
   useEffect(() => {
     if (id) { getCardById(id) }
@@ -18,13 +29,16 @@ function CardDetail() {
     <>
       <div className="min-h-screen bg-base-200 p-6 pb-50 flex justify-center items-center">
         <div className="card lg:card-side bg-[#23262f] shadow-xl max-w-4xl border border-gray-700">
-          <figure className="p-6 bg-black/20 lg:w-1/2">
+          <div className="p-6 bg-black/20 lg:w-1/2 ">
+
+
+            <WishlistCard cardId={currentCard.id} />
             <img
               src={`https://wsrv.nl/?url=${currentCard.image}`}
               alt={currentCard.name}
               className="w-full h-auto object-contain rounded shadow-2xl group-hover:scale-105 transition-transform duration-500"
             />
-          </figure>
+          </div>
           <div className="card-body lg:w-1/2 text-white ">
             <div className='flex justify-end'>
               <button onClick={() => navigate(-1)} className="btn btn-ghost btn-lg w-fit text-info ">← Back</button>
@@ -37,7 +51,7 @@ function CardDetail() {
               <p><span className="text-gray-500 uppercase text-xs block">Rarity</span>
                 <span className="badge badge-ghost badge-lg rounded-sm">{currentCard.rarity}</span>
               </p>
-              <p><span className="text-gray-500 uppercase text-xs ">Color :</span>{currentCard.color}</p>
+              <p><span className="text-gray-500 uppercase text-xs ">Color : </span>{currentCard.color}</p>
               {currentCard.effect && <p className="text-gray-400 mt-4 text-xl">{currentCard.effect}</p>}
             </div>
 
@@ -47,6 +61,7 @@ function CardDetail() {
                 <span className="text-3xl font-black text-white">{currentCard.price} <span className="text-sm text-gray-400">THB</span></span>
               </div>
               <button
+                onClick={hdlAddToCart}
                 className="btn btn-primary w-full"
               >
                 ADD TO CART

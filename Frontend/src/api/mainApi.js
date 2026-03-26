@@ -27,3 +27,8 @@ export const createOrder = (body) => mainApi.post('/orders', body)
 export const getAllOrder = () => mainApi.get('/orders')
 export const getOrderById = (orderId) => mainApi.get(`/orders/${orderId}`)
 export const notifyPayment = (orderId, data) => mainApi.patch(`/orders/${orderId}/payment`, data)
+
+// wishlist
+export const createWishlist = (body) => mainApi.post('/wishlist', body)
+export const deleteWishlist = (id) => mainApi.delete(`/wishlist/${id}`)
+export const getAllWishlist = () => mainApi.get('/wishlist')

@@ -1,4 +1,3 @@
-import { useState } from "react"
 
 export default function Pagination(props) {
   const { totalItems, cardsPerPage, currentPage, setCurrentPage } = props
@@ -7,7 +6,7 @@ export default function Pagination(props) {
   if (totalPages <= 1) return null
   return (
     <>
-      <div className="flex justify-center mt-8 gap-2">
+      <div className="flex justify-center mt-4 gap-2">
         <button
           className="btn btn-outline btn-sm"
           disabled={currentPage === 1}

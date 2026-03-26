@@ -10,7 +10,7 @@ function HistoryDetail() {
 
   useEffect(() => {
     if (orderId) {
-      getOrderById(orderId);
+      getOrderById(orderId)
     }
   }, [orderId])
 
@@ -34,7 +34,7 @@ function HistoryDetail() {
         <div className="space-y-4 mb-8">
           <h2 className="text-lg font-semibold text-gray-700">Order : #{currentOrder.id}</h2>
           {currentOrder.items?.map((item) => (
-            <div key={item.id} className="flex items-center gap-4 p-4 border rounded-lg hover:bg-gray-300 transition-colors">
+            <div key={item.id} className="flex items-center gap-4 p-4 border border-gray-700/50 rounded-lg hover:bg-gray-300 transition-colors">
               <div className="w-20 h-28 bg-white rounded-lg overflow-hidden flex-shrink-0">
                 <img
                   src={`https://wsrv.nl/?url=${item.card.image}`}
@@ -48,7 +48,7 @@ function HistoryDetail() {
               </div>
               <div className="text-right">
                 <p className="text-sm text-gray-500">x{item.quantity}</p>
-                <p className="font-bold text-gray-800">฿{item.soldPrice.toLocaleString()}</p>
+                <p className="font-bold text-gray-800">{item.soldPrice.toLocaleString()} THB</p>
               </div>
             </div>
           ))}
@@ -62,7 +62,7 @@ function HistoryDetail() {
           <div >
             <div className="flex justify-between items-center">
               <span className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">ราคารวม :</span>
-              <span className="text-2xl font-bold text-gray-800">฿{currentOrder.total.toLocaleString()}</span>
+              <span className="text-2xl font-bold text-gray-800">{currentOrder.total.toLocaleString()} THB</span>
             </div>
           </div>
         </div>

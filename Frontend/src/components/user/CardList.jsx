@@ -4,6 +4,7 @@ import useCartStore from '../../stores/cartStore'
 import { Link } from 'react-router'
 import Pagination from './Pagination'
 import { toast } from 'react-toastify'
+import WishlistCard from './WishlistCard'
 
 function CardList() {
   const getAllCard = useCardStore(state => state.getAllCard)
@@ -38,6 +39,7 @@ function CardList() {
 
               <div className="relative w-[45%] bg-black/20 p-2 flex items-center justify-center overflow-hidden">
 
+                <WishlistCard cardId={card.id} />
 
                 <Link to={`/user/card/${card.id}`} >
                   <img

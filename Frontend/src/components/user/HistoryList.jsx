@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import useOrderStore from '../../stores/orderStore'
 import { Link } from 'react-router'
-import TimeAgo from 'react-timeago'
 
 
 function HistoryList() {
