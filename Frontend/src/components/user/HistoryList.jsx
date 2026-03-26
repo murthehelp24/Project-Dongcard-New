@@ -25,7 +25,7 @@ function HistoryList() {
               <div key={item.id} className="flex items-center bg-gradient-to-r from-gray-600 to-gray-100 p-4 rounded-2xl shadow-sm relative group">
 
                 <Link className='w-full' to={`/user/history/${item.id}`}>
-                  <div key={item.id} className="p-4 rounded-lg shadow-sm w-full">
+                  <div key={item.id} className="p-4 rounded-lg shadow-sm w-full hover:bg-gray-300 transition-colors">
                     <div className="flex justify-between font-semibold">
                       <div className='flex gap-2'>
                         <p className='border px-2'>Order ID: 

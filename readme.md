@@ -20,8 +20,8 @@
 | Method | Path | Access | Description |
 | :--- | :--- | :--- | :--- |
 |❤️ **POST** | `/api/orders` | **User** | สร้างออเดอร์ (Checkout) และตัดสต็อกสินค้า |
-| **GET** | `/api/orders` | **User** | ดูประวัติการสั่งซื้อของตัวเอง |
-| **GET** | `/api/orders/:id` | **User/Admin** | ดูรายละเอียดออเดอร์ (รวมรายการสินค้าและสถานะ) |
+|❤️**GET** | `/api/orders` | **User** | ดูประวัติการสั่งซื้อของตัวเอง |
+|❤️ **GET** | `/api/orders/:id` | **User/Admin** | ดูรายละเอียดออเดอร์ (รวมรายการสินค้าและสถานะ) |
 |❤️ **PATCH** | `/api/orders/:id/payment` | **User** | แจ้งโอนเงิน (ส่งลิงก์รูปสลิป) และเปลี่ยนสถานะเป็น PAID |
 | **GET** | `/api/admin/orders` | **Admin** | ดูรายการออเดอร์ทั้งหมดในระบบ (เพื่อตรวจสลิป) |
 | **PATCH** | `/api/admin/orders/:id/status` | **Admin** | ยืนยันการส่งของ และเปลี่ยนสถานะเป็น SHIPPED |

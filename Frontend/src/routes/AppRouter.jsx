@@ -6,6 +6,7 @@ import UserLayout from '../layouts/userLayout'
 import CardDetail from '../components/user/CardDetail'
 import History from '../pages/user/History'
 import HistoryDetail from '../components/user/HistoryDetail'
+import Wishlist from '../pages/user/Wishlist'
 
 const Login = lazy(() => import('../pages/public/Login'))
 const Card = lazy(() => import('../pages/user/Card'))
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
       { path: "payment/:orderId", element: <Payment /> },
       { path: "history", element: <History /> },
       { path: "history/:orderId", element: <HistoryDetail /> },
+      { path: "wishlist", element: <Wishlist /> },
     ]
   },
 
