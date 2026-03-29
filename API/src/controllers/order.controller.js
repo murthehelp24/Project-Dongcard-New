@@ -30,7 +30,6 @@ export async function getOrderDetail(req, res, next) {
     const order = await findOrderById(req.params.id)
     if (!order) throw createError(404, 'ไม่พบออเดอร์นี้')
 
-    // เช็คว่าเป็นเจ้าของหรือ admin
     if (req.user.role !== "ADMIN" && order.buyerId !== req.user.id) {
       // console.log(req.user.role)
       throw createError(403, 'ไม่มีสิทธ์เข้าถึง')

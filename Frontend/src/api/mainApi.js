@@ -32,3 +32,12 @@ export const notifyPayment = (orderId, data) => mainApi.patch(`/orders/${orderId
 export const createWishlist = (body) => mainApi.post('/wishlist', body)
 export const deleteWishlist = (id) => mainApi.delete(`/wishlist/${id}`)
 export const getAllWishlist = () => mainApi.get('/wishlist')
+
+// admin order
+export const getAllOrderAdmin = () => mainApi.get('/orders/admin/all')
+export const editOrderAdmin = (id, data) => mainApi.patch(`orders/${id}/status`, data)
+
+// admin card
+export const addCardByAdmin = (body) => mainApi.post('admin/cards', body)
+export const editCardByAdmin = (id, data) => mainApi.put(`admin/cards/${id}`, data)
+export const deleteCardByAdmin = (id) => mainApi.delete(`admin/cards/${id}`)

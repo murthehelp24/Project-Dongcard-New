@@ -82,7 +82,7 @@ export async function getAllOrders() {
   return await prisma.order.findMany({
     include: {
       buyer: {
-        select: { username: true, email: true } // ดึงชื่ออีเมลคนซื้อมาด้วย
+        select: { username: true, email: true } 
       },
       items: true
     },

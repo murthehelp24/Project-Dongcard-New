@@ -29,9 +29,9 @@
 ## ❤️ Wishlist (User Favorites)
 | Method | Path | Access | Description |
 | :--- | :--- | :--- | :--- |
-| **GET** | `/api/wishlist` | **User** | ดึงรายการการ์ดที่ถูกใจทั้งหมดของ User |
-| **POST** | `/api/wishlist` | **User** | เพิ่มการ์ดเข้ารายการที่ถูกใจ |
-| **DELETE** | `/api/wishlist/:cardId` | **User** | ลบการ์ดออกจากรายการที่ถูกใจ |
+|❤️ **GET** | `/api/wishlist` | **User** | ดึงรายการการ์ดที่ถูกใจทั้งหมดของ User |
+|❤️ **POST** | `/api/wishlist` | **User** | เพิ่มการ์ดเข้ารายการที่ถูกใจ |
+|❤️ **DELETE** | `/api/wishlist/:cardId` | **User** | ลบการ์ดออกจากรายการที่ถูกใจ |
 
 ---
 

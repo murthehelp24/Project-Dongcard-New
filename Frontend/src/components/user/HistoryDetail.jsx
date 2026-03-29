@@ -18,15 +18,25 @@ function HistoryDetail() {
     return <div className="p-10 text-center">กำลังโหลดรายละเอียดคำสั่งซื้อ</div>
   }
 
+    const getStatusColor = (status) => {
+    switch (status) {
+      case 'PENDING': return 'bg-yellow-100 text-yellow-700';
+      case 'PAID': return 'bg-green-100 text-green-700';
+      case 'SHIPPED': return 'bg-blue-100 text-blue-700';
+      case 'CANCELLED': return 'bg-red-100 text-red-700';
+      default: return 'bg-gray-100 text-gray-700';
+    }
+  }
+
   return (
     <>
       <div className="max-w-3xl mx-auto p-6 bg-gradient-to-b from-gray-500 to-gray-100 shadow-lg rounded-lg my-8">
         <div className="flex justify-between items-center border-b pb-4 mb-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-800">รายละเอียดออเดอร์</h1>
-            <p className="text-sm text-gray-800">Ordered on: {new Date(currentOrder.createdAt).toLocaleString()}</p>
+            <p className="text-sm text-gray-800">{new Date(currentOrder.createdAt).toLocaleString()}</p>
           </div>
-          <div className={`px-4 py-1 rounded-full text-sm font-semibold ${currentOrder.status === 'PAID' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+          <div className={`px-4 py-1 rounded-full text-sm font-semibold ${getStatusColor(currentOrder.status)}`}>
             {currentOrder.status}
           </div>
         </div>

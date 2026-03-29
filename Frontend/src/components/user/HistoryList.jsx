@@ -10,7 +10,17 @@ function HistoryList() {
   useEffect(() => {
     getAllOrder()
   }, [])
-  // console.log(orders)
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'PENDING': return 'bg-yellow-100 text-yellow-700';
+      case 'PAID': return 'bg-green-100 text-green-700';
+      case 'SHIPPED': return 'bg-blue-100 text-blue-700';
+      case 'CANCELLED': return 'bg-red-100 text-red-700';
+      default: return 'bg-gray-100 text-gray-700';
+    }
+  }
+
   return (
     <div className="min-h-screen p-8 text-base-200">
       <div className="max-w-6xl mx-auto">
@@ -27,15 +37,15 @@ function HistoryList() {
                   <div key={item.id} className="p-4 rounded-lg shadow-sm w-full hover:bg-gray-300 transition-colors">
                     <div className="flex justify-between font-semibold">
                       <div className='flex gap-2'>
-                        <p className='border px-2'>Order ID: 
+                        <p className='border px-2'>Order ID:
                           #{item.id}
                         </p>
                         <span className='text-xs mt-1 text-gray-800'>{new Date(item.createdAt).toLocaleString()}
                         </span>
                       </div>
-                      <p
-                        className={`px-4 py-1 rounded-full text-sm font-semibold ${item.status === 'PAID' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                        {item.status}</p>
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(item.status)}`}>
+                    {item.status}
+                  </span>
                     </div>
 
                     <div className="mt-2 pl-4 border-l-2">
