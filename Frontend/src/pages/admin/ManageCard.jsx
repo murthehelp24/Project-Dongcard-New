@@ -1,8 +1,11 @@
 import React from 'react'
+import CardAdmin from '../../components/admin/CardAdmin'
 
 function ManageCard() {
   return (
-    <div>ManageCard</div>
+    <div>
+      <CardAdmin/>
+    </div>
   )
 }
 
