@@ -15,6 +15,7 @@ const useAdminStore = create((set, get) => ({
     get().getAllOrderAdmin()
     return resp
   },
+  // cards
   fetchCards: async () => {
     const resp = await getAllCard()
     set({ cards: resp.data.cards })

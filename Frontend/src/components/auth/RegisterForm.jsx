@@ -31,7 +31,6 @@ function RegisterForm() {
   }
 
 
-
   return (
     <div>
       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => {
@@ -40,7 +39,6 @@ function RegisterForm() {
       }}>✕</button>
 
       <form onSubmit={handleSubmit(onSubmit)} className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
-        <legend className="fieldset-legend">Register</legend>
 
         <label className="label">Username</label>
         <input type="text"
@@ -51,7 +49,7 @@ function RegisterForm() {
         <p className='text text-error'>{errors.username?.message}</p>
 
         <label className="label">Email</label>
-        <input type="text"
+        <input type="email"
           className="input w-full"
           placeholder="Email"
           {...register('email')}
@@ -59,7 +57,7 @@ function RegisterForm() {
         <p className='text text-error'>{errors.email?.message}</p>
 
         <label className="label">Password</label>
-        <input type="text"
+        <input type="password"
           className="input w-full"
           placeholder="Password"
           {...register('password')}

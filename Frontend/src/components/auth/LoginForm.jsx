@@ -28,7 +28,7 @@ function LoginForm() {
       }
     } catch (error) {
       console.dir(error)
-      const errMsg = error.response?.data.message || error.message
+      const errMsg = error.response.data.message
       toast.error(errMsg)
     }
   }
@@ -40,10 +40,9 @@ function LoginForm() {
         reset()}}>✕</button>
 
       <form onSubmit={handleSubmit(onSubmit)} className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
-        <legend className="fieldset-legend">Login</legend>
 
         <label className="label">Email</label>
-        <input type="text"
+        <input type="email"
           className="input w-full"
           placeholder="Email"
           {...register('email')}
@@ -51,7 +50,7 @@ function LoginForm() {
         <p className='text text-error'>{errors.email?.message}</p>
 
         <label className="label">Password</label>
-        <input type="text"
+        <input type="password"
           className="input w-full"
           placeholder="Password"
           {...register('password')}
@@ -59,7 +58,7 @@ function LoginForm() {
         <p className='text text-error'>{errors.password?.message}</p>
 
         <button className="btn btn-neutral mt-4"
-        >Login {isSubmitting ? <span className="loading loading-spinner"></span> : ''}
+        >เข้าสู่ระบบ {isSubmitting ? <span className="loading loading-spinner"></span> : ''}
         </button>
       </form>
     </div>

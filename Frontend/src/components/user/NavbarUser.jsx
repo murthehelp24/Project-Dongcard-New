@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import useUserStore from '../../stores/userStore'
 import useCartStore from '../../stores/cartStore'
+import useCardStore from '../../stores/cardStore'
 
 
 function NavbarUser() {
@@ -8,6 +9,9 @@ function NavbarUser() {
 
   const cart = useCartStore(state => state.cart)
   const totalPrice = useCartStore(state => state.totalPrice)
+
+  const searchQuery = useCardStore(state => state.searchQuery)
+  const setSearchQuery = useCardStore(state => state.setSearchQuery)
 
   const totalCard = cart.reduce((sum, item) => sum + (item.quantity || 1), 0)
   return (
@@ -26,7 +30,7 @@ function NavbarUser() {
               <li><Link to='wishlist'>รายการโปรด</Link></li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">DONGCARD</a>
+          <Link to='/user' className="btn btn-ghost text-xl">DONGCARD</Link>
         </div>
 
         <div className="navbar-center hidden lg:flex">
@@ -54,7 +58,9 @@ function NavbarUser() {
               <input
                 type="text"
                 className="grow placeholder:text-gray-400 text-white"
-                placeholder="Search Card"
+                placeholder=" ค้นหา"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </label>
           </div>

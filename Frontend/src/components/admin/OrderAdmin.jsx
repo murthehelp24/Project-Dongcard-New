@@ -65,10 +65,10 @@ function OrderAdmin() {
                       value={order.status}
                       onChange={(e) => editOrderAdmin(order.id, e.target.value)}
                     >
-                      <option value="PENDING">PENDING</option>
-                      <option value="PAID">PAID</option>
-                      <option value="SHIPPED">SHIPPED</option>
-                      <option value="CANCELLED">CANCELLED</option>
+                      <option value="PENDING">รอดำเนินการ</option>
+                      <option value="PAID">จ่ายแล้ว</option>
+                      <option value="SHIPPED">จัดส่งแล้ว</option>
+                      <option value="CANCELLED">ยกเลิก</option>
                     </select>
                   </td>
                 </tr>

@@ -7,9 +7,9 @@ function NavbarAdmin() {
 
   return (
     <>
-      <div className="navbar bg-base-100 shadow-sm sticky top-0 z-[100] backdrop-blur-md bg-base-100/80">
+      <div className="navbar bg-base-100 shadow-sm sticky top-0 z-[100] backdrop-blur-md ">
         <div className="navbar-start">
-          <a className="btn btn-ghost text-xl">DONGCARD</a>
+          <Link to='/user' className="btn btn-ghost text-xl">DONGCARD</Link>
         </div>
 
         <div className="navbar-end gap-2">

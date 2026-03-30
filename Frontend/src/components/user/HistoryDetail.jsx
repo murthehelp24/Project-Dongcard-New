@@ -43,7 +43,7 @@ function HistoryDetail() {
 
         <div className="space-y-4 mb-8">
           <h2 className="text-lg font-semibold text-gray-700">Order : #{currentOrder.id}</h2>
-          {currentOrder.items?.map((item) => (
+          {currentOrder.items.map((item) => (
             <div key={item.id} className="flex items-center gap-4 p-4 border border-gray-700/50 rounded-lg hover:bg-gray-300 transition-colors">
               <div className="w-20 h-28 bg-white rounded-lg overflow-hidden flex-shrink-0">
                 <img

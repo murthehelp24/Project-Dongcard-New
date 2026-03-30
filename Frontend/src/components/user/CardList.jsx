@@ -8,7 +8,7 @@ import WishlistCard from './WishlistCard'
 
 function CardList() {
   const getAllCard = useCardStore(state => state.getAllCard)
-  const cards = useCardStore(state => state.cards)
+  const filteredCards = useCardStore(state => state.filteredCards)
 
   const addToCart = useCartStore(state => state.addToCart)
 
@@ -27,7 +27,7 @@ function CardList() {
 
   const indexOfLastCard = currentPage * cardsPerPage
   const indexOfFirstCard = indexOfLastCard - cardsPerPage
-  const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard)
+  const currentCards = filteredCards.slice(indexOfFirstCard, indexOfLastCard)
 
 
   return (
@@ -67,7 +67,7 @@ function CardList() {
                     className="btn btn-primary btn-sm w-full ..."
                     onClick={() => hdlAddToCart(card)}
                   >
-                    ADD TO CART
+                    หยิบใส่ตะกร้า
                   </button>
                 </div>
               </div>
@@ -78,7 +78,7 @@ function CardList() {
       </div>
 
       <Pagination
-        totalItems={cards.length}
+        totalItems={filteredCards.length}
         cardsPerPage={cardsPerPage}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
