@@ -1,10 +1,11 @@
 import { create } from "zustand";
-import { addCardByAdmin, deleteCardByAdmin, editCardByAdmin, editOrderAdmin, getAllCard, getAllOrderAdmin } from "../api/mainApi";
+import { addCardByAdmin, deleteCardByAdmin, editCardByAdmin, editOrderAdmin, getAllCard, getAllOrderAdmin, getDashboardStats } from "../api/mainApi";
 
 
 const useAdminStore = create((set, get) => ({
   admin: [],
   cards: [],
+  dashboardStats: null,
   getAllOrderAdmin: async () => {
     const resp = await getAllOrderAdmin()
     set({ admin: resp.data.orders })
@@ -35,6 +36,15 @@ const useAdminStore = create((set, get) => ({
     const resp = await deleteCardByAdmin(id)
     get().fetchCards()
     return resp
+  },
+  fetchDashboardData: async () => {
+    try {
+      const resp = await getDashboardStats()
+      set({ dashboardStats: resp.data })
+      return resp
+    } catch (error) {
+      console.error("Error fetching dashboard stats:", error)
+    }
   }
 
 }))

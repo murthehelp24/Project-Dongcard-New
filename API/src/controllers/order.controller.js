@@ -40,6 +40,8 @@ export async function getOrderDetail(req, res, next) {
   }
 }
 
+import cloudinaryUpload from '../utils/cloudinary.js'
+
 export async function notifyPayment(req, res, next) {
   try {
     // เอาออเดอร์มาเช็ค
@@ -50,8 +52,13 @@ export async function notifyPayment(req, res, next) {
     if (order.buyerId !== req.user.id) throw createError(403, 'ไม่มีสิทธิ์แจ้งชำระเงินสำหรับออเดอร์นี้')
 
     // ตรวจสอบสลิป
-    const slipUrl = req.file ? req.file.path : req.body.paymentSlip
-    if (!slipUrl) throw createError(400, 'กรุณาแนบสลิป')
+    if (!req.file && !req.body.paymentSlip) throw createError(400, 'กรุณาแนบสลิป')
+
+    // ถ้ามีไฟล์อัพโหลดมา ให้ส่งขึ้น Cloudinary
+    let slipUrl = req.body.paymentSlip
+    if (req.file) {
+      slipUrl = await cloudinaryUpload(req.file.path, "payment-slips")
+    }
 
     // อัพเดทสถานะ
     const updatedOrder = await updatePayment(req.params.id, slipUrl)
@@ -61,7 +68,7 @@ export async function notifyPayment(req, res, next) {
     })
   } catch (error) {
     // ถ้า error และมีไฟล์ถูกอัพโหลดมาแล้ว ให้สั่งลบทิ้ง
-    if (req.file) {
+    if (req.file && req.file.path) {
       await fs.unlink(req.file.path).catch(err => console.error("ลบไฟล์ไม่สำเร็จ:", err))
     }
     next(error)

@@ -41,3 +41,6 @@ export const editOrderAdmin = (id, data) => mainApi.patch(`orders/${id}/status`,
 export const addCardByAdmin = (body) => mainApi.post('/cards', body)
 export const editCardByAdmin = (id, data) => mainApi.put(`/cards/${id}`, data)
 export const deleteCardByAdmin = (id) => mainApi.delete(`/cards/${id}`)
+
+// admin dashboard
+export const getDashboardStats = () => mainApi.get('/admin/stats')

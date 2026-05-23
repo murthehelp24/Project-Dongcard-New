@@ -58,7 +58,7 @@ function Animation() {
           <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600 rounded-xl blur-2xl opacity-10 group-hover:opacity-40 transition-opacity duration-700 animate-pulse"></div>
 
           <img
-            src="https://asia-th.onepiece-cardgame.com/renewal/images/top/mv/op13/mv.webp"
+            src="https://asia-th.onepiece-cardgame.com/onepiececg/bccard/th/banner/2026/04/24/5O5wbNoFY7BGCt6A/mv.webp"
             className="relative rounded-lg shadow-[0_0_50px_rgba(0,0,0,0.8)] w-full object-contain border border-white/10"
             alt="One Piece Card Game"
           />
