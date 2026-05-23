@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 export const mainApi = axios.create({
-  baseURL: 'project-dongcard-new-85wo.vercel.app'
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000'
 })
 
 mainApi.interceptors.request.use(config => {
