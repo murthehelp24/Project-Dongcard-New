@@ -2,8 +2,15 @@ import useUserStore from "../stores/userStore";
 import axios from 'axios'
 
 
+let apiURL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
+// ตรวจสอบและเติม https:// หากลืมใส่ใน Environment Variable เพื่อป้องกันปัญหา URL ซ้อนกันบน Vercel
+if (apiURL && !apiURL.startsWith('http') && apiURL !== 'localhost') {
+  apiURL = `https://${apiURL}`
+}
+
 export const mainApi = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000'
+  baseURL: apiURL
 })
 
 mainApi.interceptors.request.use(config => {
