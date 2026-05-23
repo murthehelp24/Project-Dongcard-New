@@ -1,5 +1,5 @@
 import React from 'react'
-import WishlistAll from '../../components/user/wishlistAll'
+import WishlistAll from '../../components/user/WishlistAll'
 
 function Wishlist() {
   return (
