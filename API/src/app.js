@@ -8,8 +8,19 @@ import adminRouter from './routes/admin.route.js'
 import cors from 'cors'
 
 const app = express()
+
+// ปรับปรุง CORS ให้รองรับการเรียกจากหน้าเว็บที่ Deploy บน Vercel
+app.use(cors({
+  origin: true, // อนุญาตทุก origin ที่เรียกมา (หรือระบุเป็น URL ของ Frontend คุณ)
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
+
 app.use(express.json())
-app.use(cors())
+
+// Route สำหรับเช็คว่า API รันอยู่หรือไม่
+app.get('/', (req, res) => res.json({ message: 'DongCard API is running...' }))
 
 app.use('/api/auth', authRouter)
 app.use('/api/cards', cardRouter)
