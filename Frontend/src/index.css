@@ -1,2 +1,105 @@
 @import "tailwindcss";
-@plugin "daisyui"
+@plugin "daisyui";
+
+@theme {
+  /* Override default tailwind colors to follow our theme variables */
+  --color-gray-50: var(--bg-main);
+  --color-gray-100: var(--border-subtle);
+  --color-gray-200: var(--border-main);
+  --color-white: var(--bg-surface);
+  
+  --color-blue-600: var(--color-accent);
+  --color-blue-500: var(--color-accent);
+  
+  --color-primary: var(--color-accent);
+  --color-primary-content: #ffffff;
+}
+
+@layer base {
+  :root, [data-theme="light"] {
+    --bg-main: #fafafa;
+    --bg-surface: #ffffff;
+    --color-text: #111827;
+    --color-accent: #2563eb;
+    --border-main: #e5e7eb;
+    --border-subtle: #f3f4f6;
+
+    --color-base-100: var(--bg-surface);
+    --color-base-200: var(--bg-main);
+    --color-base-content: var(--color-text);
+  }
+
+  [data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-surface: #1e293b;
+    --color-text: #f8fafc;
+    --color-accent: #3b82f6;
+    --border-main: #334155;
+    --border-subtle: #1e293b;
+
+    --color-base-100: var(--bg-surface);
+    --color-base-200: var(--bg-main);
+    --color-base-content: var(--color-text);
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--color-text);
+    @apply transition-colors duration-300;
+  }
+}
+
+/* Ensure DaisyUI components also follow the theme properly */
+.card {
+  background-color: var(--bg-surface);
+  color: var(--color-text);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* Global Transitions for smooth theme switching */
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Specific overrides for common admin elements to ensure they look clean */
+.stat {
+  @apply bg-transparent border-none;
+}
+
+/* Global Text Color Overrides for Dark Mode to ensure readability */
+[data-theme="dark"] {
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --text-muted: #64748b;
+}
+
+[data-theme="dark"] .text-gray-950,
+[data-theme="dark"] .text-gray-900,
+[data-theme="dark"] .text-gray-800 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-gray-700,
+[data-theme="dark"] .text-gray-600 {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .text-gray-500 {
+  color: var(--text-tertiary) !important;
+}
+
+[data-theme="dark"] .text-gray-400,
+[data-theme="dark"] .text-gray-300 {
+  color: var(--text-muted) !important;
+}
+
+/* Fix text-white to always be white */
+.text-white {
+  color: #ffffff !important;
+}

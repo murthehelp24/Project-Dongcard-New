@@ -23,9 +23,12 @@ function Filter() {
     setFilters({ rarity: [], color: [] });
   };
   return (
-    <div className="p-6 bg-base-300 w-60 min-h-screen flex flex-col gap-2">
-      <h2 className="text-xl font-black tracking-tight">FILTERS</h2>
-      <div className="divider my-0"></div>
+    <div className="p-6 bg-base-100 lg:bg-base-300 w-72 h-full min-h-screen flex flex-col gap-2 border-r border-base-200 lg:border-none shadow-xl lg:shadow-none">
+      <div className="flex justify-between items-center lg:block">
+        <h2 className="text-xl font-black tracking-tight uppercase">Filters</h2>
+        <label htmlFor="filter-drawer" className="btn btn-ghost btn-sm btn-circle lg:hidden">✕</label>
+      </div>
+      <div className="divider my-0 opacity-50"></div>
 
       <div>
         <h3 className="font-bold text-lg mb-3 text-primary">Rarity</h3>

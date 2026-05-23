@@ -2,10 +2,14 @@ import { Link } from 'react-router'
 import useUserStore from '../../stores/userStore'
 import useCartStore from '../../stores/cartStore'
 import useCardStore from '../../stores/cardStore'
+import useThemeStore from '../../stores/themeStore'
+import { Sun, Moon, User, ShoppingBag, LogOut, LayoutDashboard } from 'lucide-react'
 
 
 function NavbarUser() {
   const logout = useUserStore(state => state.logout)
+  const user = useUserStore(state => state.user)
+  const { theme, toggleTheme } = useThemeStore()
 
   const cart = useCartStore(state => state.cart)
   const totalPrice = useCartStore(state => state.totalPrice)
@@ -34,7 +38,7 @@ function NavbarUser() {
         </div>
 
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 font-bold">
             <li><a>หน้าหลัก</a></li>
             <li><Link to=''>การ์ด</Link></li>
             <li><Link to='wishlist'>รายการโปรด</Link></li>
@@ -43,7 +47,7 @@ function NavbarUser() {
 
         <div className="navbar-end gap-2">
           <div className="form-control">
-            <label className="input input-bordered flex items-center gap-2 rounded-full bg-base-200 border-none text-gray-400 w-full max-w-xs lg:max-w-md lg:w-80 transition-all duration-300">
+            <label className="input input-bordered flex items-center gap-2 rounded-full bg-base-200 border-none text-gray-400 w-24 sm:w-64 lg:w-80 transition-all duration-300 focus-within:w-40 sm:focus-within:w-64 lg:focus-within:w-80">
               <svg
                 xmlns="http://www.w3.org"
                 viewBox="0 0 16 16"
@@ -57,14 +61,22 @@ function NavbarUser() {
 
               <input
                 type="text"
-                className="grow placeholder:text-gray-400 text-white"
+                className="grow placeholder:text-gray-400"
                 placeholder=" ค้นหา"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </label>
           </div>
-          <div className="flex-none">
+          <div className="flex-none flex items-center gap-1">
+            {/* Theme Toggle Button */}
+            <button 
+              onClick={toggleTheme}
+              className="btn btn-ghost btn-circle text-gray-500 hover:bg-gray-100 transition-all duration-300"
+              title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+            >
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} className="text-yellow-500" />}
+            </button>
 
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -104,19 +116,44 @@ function NavbarUser() {
 
             </div>
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar border-2 border-primary/10">
                 <div className="w-10 rounded-full">
                   <img
-                    alt="Tailwind CSS Navbar component"
+                    alt="User Profile"
                     src="https://res.cloudinary.com/dlqrcjic8/image/upload/v1773811239/qapfposedl45lpskhn0b.png" />
                 </div>
               </div>
               <ul
                 tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                <li><a>โปรไฟล์</a></li>
-                <li><Link to='/user/history'>ประวัติการสั่งซื้อ</Link></li>
-                <li><button onClick={logout}>ออกจากระบบ</button></li>
+                className="menu menu-sm dropdown-content bg-base-100 border border-base-200 rounded-2xl z-[1] mt-3 w-64 p-2 shadow-2xl">
+                
+                <div className="px-4 py-3 border-b border-base-200 mb-2">
+                  <p className="text-[10px] text-primary font-black uppercase tracking-widest">{user?.role || 'Guest'}</p>
+                  <p className="text-sm font-bold text-base-content truncate">{user?.username || 'User Account'}</p>
+                  <p className="text-[11px] text-base-content/50 truncate font-medium">{user?.email}</p>
+                </div>
+
+                {user?.role === 'ADMIN' && (
+                  <li>
+                    <Link to="/admin" className="flex items-center gap-3 py-3 rounded-xl hover:bg-primary/10 text-primary font-bold">
+                      <LayoutDashboard size={18}/> Admin Dashboard
+                    </Link>
+                  </li>
+                )}
+
+                <li>
+                  <Link to='/user/history' className="flex items-center gap-3 py-3 rounded-xl hover:bg-base-200 text-base-content/70 font-bold">
+                    <ShoppingBag size={18}/> ประวัติการสั่งซื้อ
+                  </Link>
+                </li>
+                
+                <div className="divider my-1 opacity-50"></div>
+                
+                <li>
+                  <button onClick={logout} className="flex items-center gap-3 py-3 rounded-xl hover:bg-error/10 text-error font-bold">
+                    <LogOut size={18}/> ออกจากระบบ
+                  </button>
+                </li>
               </ul>
             </div>
           </div>

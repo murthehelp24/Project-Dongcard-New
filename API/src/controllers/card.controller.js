@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import createError from 'http-errors'
 import { createCard, findAllCard, findCardById, removeCard, updateCard } from '../services/card.service.js'
+import cloudinaryUpload from '../utils/cloudinary.js'
 
 export async function getAllCard(req, res, next) {
   try {
@@ -23,7 +24,17 @@ export async function getCardById(req, res, next) {
 
 export async function addCard(req, res, next) {
   try {
-    const newCard = await createCard(req.body)
+    const data = { ...req.body }
+    if (req.file) {
+      data.image = await cloudinaryUpload(req.file.path, 'card-images')
+    }
+    
+    // Convert numeric fields from strings to numbers
+    if (data.price) data.price = Number(data.price)
+    if (data.stock) data.stock = Number(data.stock)
+    if (data.power) data.power = Number(data.power)
+
+    const newCard = await createCard(data)
     res.json({
       message: 'เพิ่มการ์ดสำเร็จ',
       card: newCard
@@ -35,7 +46,16 @@ export async function addCard(req, res, next) {
 
 export async function editCard(req, res, next) {
   try {
-    const updatedCard = await updateCard(req.params.id, req.body)
+    const data = { ...req.body }
+    if (req.file) {
+      data.image = await cloudinaryUpload(req.file.path, 'card-images')
+    }
+
+    if (data.price) data.price = Number(data.price)
+    if (data.stock) data.stock = Number(data.stock)
+    if (data.power) data.power = Number(data.power)
+
+    const updatedCard = await updateCard(req.params.id, data)
     res.json({
       message: 'แก้ไขการ์ดสำเร็จ',
       card: updatedCard

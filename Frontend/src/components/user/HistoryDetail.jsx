@@ -30,59 +30,66 @@ function HistoryDetail() {
 
   return (
     <>
-      <div className="max-w-3xl mx-auto p-6 bg-gradient-to-b from-gray-500 to-gray-100 shadow-lg rounded-lg my-8">
-        <div className="flex justify-between items-center border-b pb-4 mb-6">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-800">รายละเอียดออเดอร์</h1>
-            <p className="text-sm text-gray-800">{new Date(currentOrder.createdAt).toLocaleString()}</p>
-          </div>
-          <div className={`px-4 py-1 rounded-full text-sm font-semibold ${getStatusColor(currentOrder.status)}`}>
-            {currentOrder.status}
-          </div>
-        </div>
-
-        <div className="space-y-4 mb-8">
-          <h2 className="text-lg font-semibold text-gray-700">Order : #{currentOrder.id}</h2>
-          {currentOrder.items.map((item) => (
-            <div key={item.id} className="flex items-center gap-4 p-4 border border-gray-700/50 rounded-lg hover:bg-gray-300 transition-colors">
-              <div className="w-20 h-28 bg-white rounded-lg overflow-hidden flex-shrink-0">
-                <img
-                  src={`https://wsrv.nl/?url=${item.card.image}`}
-                  alt={item.card.name} />
+      <div className="min-h-screen bg-base-200 p-4 md:p-8 flex justify-center items-start">
+        <div className="max-w-3xl w-full bg-base-100 shadow-2xl rounded-[2.5rem] overflow-hidden border border-base-200">
+          <div className="p-8 md:p-12">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-base-200 pb-8 mb-8">
+              <div>
+                <h1 className="text-3xl font-black text-base-content tracking-tighter">รายละเอียดออเดอร์</h1>
+                <p className="text-sm font-bold text-base-content/40 mt-1 uppercase tracking-widest">{new Date(currentOrder.createdAt).toLocaleString('th-TH')}</p>
               </div>
-              <div className="flex-1">
-                <h3 className="font-bold text-gray-800">{item.card.name}</h3>
-                <p className="text-sm text-gray-600">{item.card.id}</p>
-                <p className="text-xs text-gray-500">{item.card.type}</p>
-
-              </div>
-              <div className="text-right">
-                <p className="text-sm text-gray-500">x{item.quantity}</p>
-                <p className="font-bold text-gray-800">{item.soldPrice.toLocaleString()} THB</p>
+              <div className={`px-5 py-2 rounded-2xl text-xs font-black uppercase border ${getStatusColor(currentOrder.status)}`}>
+                {currentOrder.status}
               </div>
             </div>
-          ))}
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t pt-6">
-          <div>
-            <h2 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">ที่อยู่จัดส่ง</h2>
-            <p className="text-gray-700">{currentOrder.address || 'No address provided'}</p>
-          </div>
-          <div >
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">ราคารวม :</span>
-              <span className="text-2xl font-bold text-gray-800">{currentOrder.total.toLocaleString()} THB</span>
+            <div className="space-y-4 mb-10">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-sm font-black text-base-content/30 uppercase tracking-[0.2em]">Order Items</h2>
+                <span className="text-xs font-bold text-base-content/50 bg-base-200 px-3 py-1 rounded-lg">ID: #{currentOrder.id}</span>
+              </div>
+              
+              {currentOrder.items.map((item) => (
+                <div key={item.id} className="flex items-center gap-4 p-4 bg-base-200/30 border border-base-200 rounded-3xl transition-all hover:bg-base-200/50">
+                  <div className="w-16 h-20 md:w-20 md:h-28 bg-base-200 rounded-xl overflow-hidden flex-shrink-0 p-1">
+                    <img
+                      src={`https://wsrv.nl/?url=${item.card.image}`}
+                      alt={item.card.name}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-black text-base-content tracking-tight">{item.card.name}</h3>
+                    <p className="text-[10px] font-bold text-base-content/40 uppercase tracking-widest">{item.card.id}</p>
+                    <span className="badge badge-ghost border-none bg-base-200 text-[9px] font-bold text-base-content/50 mt-1">{item.card.rarity}</span>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs font-black text-base-content/30 mb-1">x{item.quantity}</p>
+                    <p className="font-black text-primary">฿{item.soldPrice.toLocaleString()}</p>
+                  </div>
+                </div>
+              ))}
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-base-200 pt-8">
+              <div className="bg-base-200/50 p-6 rounded-3xl">
+                <h2 className="text-[10px] font-black text-base-content/30 uppercase tracking-[0.2em] mb-3">ที่อยู่จัดส่ง</h2>
+                <p className="text-sm font-bold text-base-content/70 leading-relaxed">{currentOrder.address || 'ไม่ได้ระบุที่อยู่'}</p>
+              </div>
+              <div className="flex flex-col justify-center items-end">
+                <span className="text-[10px] font-black text-base-content/30 uppercase tracking-[0.2em] mb-1">ราคารวมสุทธิ</span>
+                <span className="text-4xl font-black text-primary">฿{currentOrder.total.toLocaleString()}</span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => navigate(-1)}
+              className="mt-12 w-full btn btn-ghost h-14 rounded-2xl font-black text-base-content/40 hover:bg-base-200 hover:text-base-content transition-all"
+            >
+              กลับไปหน้าประวัติการสั่งซื้อ
+            </button>
           </div>
         </div>
-
-        <button
-          onClick={() => navigate(-1)}
-          className="mt-8 w-full bg-gray-800 text-white py-2 rounded-md hover:bg-black transition-colors"
-        >
-          กลับไปหน้าประวัติการซื้อ
-        </button>
       </div>
     </>
   )
