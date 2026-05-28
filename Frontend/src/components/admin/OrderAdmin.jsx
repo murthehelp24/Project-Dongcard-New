@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAdminStore from '../../stores/AdminStore'
+import Pagination from '../user/Pagination'
 import { 
     ShoppingBag, 
     User, 
@@ -19,10 +20,17 @@ function OrderAdmin() {
   const admin = useAdminStore(state => state.admin)
   const editOrderAdmin = useAdminStore(state => state.editOrderAdmin)
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const ordersPerPage = 10
+
   useEffect(() => {
     getAllOrderAdmin()
   }, [])
 
+  // Pagination Logic
+  const indexOfLastOrder = currentPage * ordersPerPage
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage
+  const currentOrders = admin.slice(indexOfFirstOrder, indexOfLastOrder)
 
   const getStatusConfig = (status) => {
     switch (status) {
@@ -70,7 +78,7 @@ function OrderAdmin() {
             </thead>
 
             <tbody className="divide-y divide-gray-50">
-              {admin.map((order) => {
+              {currentOrders.map((order) => {
                 const config = getStatusConfig(order.status);
                 return (
                   <tr key={order.id} className="hover:bg-blue-50/30 transition-colors group">
@@ -178,6 +186,16 @@ function OrderAdmin() {
               })}
             </tbody>
           </table>
+        </div>
+        
+        {/* Pagination Section */}
+        <div className="p-4 border-t border-gray-100 bg-gray-50/30">
+          <Pagination
+            totalItems={admin.length}
+            cardsPerPage={ordersPerPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </div>
     </div>
